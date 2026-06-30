@@ -1,29 +1,6 @@
 const mongoose = require('mongoose');
 
 const filterSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'A product must have a name'],
-        unique: true,
-        trim: true,
-        maxlength: [40, 'A product must have less or equal then 40 char'],
-        minlength: [3, 'A product must have more or equal then 3 char'],
-    },
-    description: {
-        type: String,
-        required: [true, 'A product must have a description'],
-    },
-    brand: String,
-    category: String,
-    sub_category: String,
-    application: [String],
-    price: {
-        type: Number
-    },
-    meta: {
-        title: String,
-        description: String
-    },
     packing_dimensions: {
         length: {
             value: Number,
@@ -84,6 +61,20 @@ const filterSchema = new mongoose.Schema({
                 type: String,
                 enum: ["gpm", "lpm", "m3/h", "gpd"],
                 default: "gpm"
+            }
+        },
+        micron: {
+            value: Number,
+            unit: {
+                type: String,
+                default: "micron"
+            }
+        },
+        mesh: {
+            value: String,
+            unit: {
+                type: String,
+                enum: ["micron", "mesh"]
             }
         },
         working_test_conditions: {
@@ -159,19 +150,16 @@ const filterSchema = new mongoose.Schema({
                 unit: {
                     type: String,
                     enum: [
-                        "plastic",
-                        "GI",
-                        "ss",
-                        "ss304",
-                        "ss316",
-                        "fiber",
+                        "membrane",
+                        "Wound",
                         "glass",
-                        "polypropylene",
+                        "Spun",
+                        "Pleated",
                         "carbon",
                         "resin",
                         "ceramic",
                         "silca",
-                        "chemical material"
+                        "UF"
                     ]
                 }
             }

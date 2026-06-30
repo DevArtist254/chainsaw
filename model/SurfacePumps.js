@@ -1,29 +1,7 @@
 const mongoose = require('mongoose');
+const Product = require('./productModel');
 
 const SurfacePumpsSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: [true, 'A product must have a name'],
-        unique: true,
-        trim: true,
-        maxlength: [40, 'A product must have less or equal then 40 char'],
-        minlength: [3, 'A product must have more or equal then 3 char'],
-    },
-    description: {
-        type: String,
-        required: [true, 'A product must have a description'],
-    },
-    brand: String,
-    category: String,
-    sub_category: String,
-    application: [String],
-    price: {
-        type: Number
-    },
-    meta: {
-        title: String,
-        description: String
-    },
     packing_dimensions: {
         length: {
             value: Number,
@@ -274,6 +252,6 @@ const SurfacePumpsSchema = new mongoose.Schema({
 }
 )
 
-const SurfacePump = mongoose.model('SurfacePump', SurfacePumpsSchema)
+const SurfacePump = Product.discriminator('SurfacePump', SurfacePumpsSchema)
 
 module.exports = SurfacePump;
