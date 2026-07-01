@@ -1,35 +1,12 @@
 const mongoose = require('mongoose');
 const Product = require('./productModel');
 
-const BlowerSchema = new mongoose.Schema({
-    packing_dimensions: {
-        length: {
-            value: Number,
-            unit: {
-                type: String,
-                enum: ["mm", "cm", "m"],
-            }
-        },
-        width: {
-            value: Number,
-            unit: {
-                type: String,
-                enum: ["mm", "cm", "m"],
-            }
-        },
-        height: {
-            value: Number,
-            unit: {
-                type: String,
-                enum: ["mm", "cm", "m"],
-            }
-        },
-        weight: {
-            value: Number,
-            unit: {
-                type: String,
-                enum: ["kg", "g", "mg"],
-            },
+const FlowMeterSchema = new mongoose.Schema({
+    type: {
+        value: String,
+        unit: {
+            type: String,
+            enum: ["panel", "inline"],
         }
     },
     specifications: {
@@ -57,28 +34,6 @@ const BlowerSchema = new mongoose.Schema({
                 unit: {
                     type: String,
                     enum: ["w", "kW", "MW", "GW"],
-                    default: "w"
-                }
-            },
-            horse_power: {
-                value: Number,
-                unit: {
-                    type: String,
-                    enum: ["hp", "w", "ahp"],
-                }
-            },
-            voltage: {
-                value: Number,
-                unit: {
-                    type: String,
-                    enum: ["V", "Voltage"],
-                }
-            },
-            ampere: {
-                value: Number,
-                unit: {
-                    type: String,
-                    enum: ["V", "Voltage"],
                 }
             },
         },
@@ -89,24 +44,6 @@ const BlowerSchema = new mongoose.Schema({
             unit: {
                 type: String,
                 enum: ["Pa", "bar", "kPa", "MPa", "psi"],
-            }
-        },
-        min_pressure_range: {
-            value: {
-                type: Number,
-            },
-            unit: {
-                type: String,
-                enum: ["Pa", "bar", "kPa", "MPa", "psi"],
-            }
-        },
-        speed: {
-            value: {
-                type: Number,
-            },
-            unit: {
-                type: String,
-                enum: ["rpm", "m/s", "km/h"],
             }
         },
         details: {
@@ -136,15 +73,15 @@ const BlowerSchema = new mongoose.Schema({
                     enum: ["female", "male", "flanged"],
                 }
             },
-            stages: {
+            material: {
                 value: {
                     type: String
                 },
                 unit: {
                     type: String,
                     enum: [
-                        "Double",
-                        "Single",
+                        "CPVC",
+                        "GI",
                     ]
                 }
             }
@@ -156,6 +93,6 @@ const BlowerSchema = new mongoose.Schema({
 }
 )
 
-const Blower = Product.discriminator('Blower', BlowerSchema)
+const FlowMeter = Product.discriminator('flowmeter', FlowMeterSchema)
 
-module.exports = Blower;
+module.exports = FlowMeter;

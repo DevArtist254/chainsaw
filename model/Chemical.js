@@ -19,11 +19,7 @@ const chemicalSchema = new mongoose.Schema({
         },
     },
     specifications: {
-        Regeneration: {
-            value: {
-                type: String,
-            },
-        },
+        Regeneration: String,
         Characteristics: [String],
         details: {
             material: {

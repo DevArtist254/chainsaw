@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Product = require('./productModel');
 
 const filterSchema = new mongoose.Schema({
     packing_dimensions: {
@@ -7,7 +8,6 @@ const filterSchema = new mongoose.Schema({
             unit: {
                 type: String,
                 enum: ["mm", "cm", "m"],
-                default: "cm"
             }
         },
         width: {
@@ -15,7 +15,6 @@ const filterSchema = new mongoose.Schema({
             unit: {
                 type: String,
                 enum: ["mm", "cm", "m"],
-                default: "cm"
             }
         },
         height: {
@@ -23,7 +22,6 @@ const filterSchema = new mongoose.Schema({
             unit: {
                 type: String,
                 enum: ["mm", "cm", "m"],
-                default: "cm"
             }
         },
         weight: {
@@ -31,7 +29,6 @@ const filterSchema = new mongoose.Schema({
             unit: {
                 type: String,
                 enum: ["kg", "g", "mg"],
-                default: "g"
             },
         },
         quantity: {
@@ -50,7 +47,6 @@ const filterSchema = new mongoose.Schema({
             unit: {
                 type: String,
                 enum: ["gpm", "lpm", "m3/h", "gpd"],
-                default: "gpm"
             }
         },
         max_flow_rate: {
@@ -60,7 +56,6 @@ const filterSchema = new mongoose.Schema({
             unit: {
                 type: String,
                 enum: ["gpm", "lpm", "m3/h", "gpd"],
-                default: "gpm"
             }
         },
         micron: {
@@ -84,12 +79,11 @@ const filterSchema = new mongoose.Schema({
             unit: {
                 type: String,
                 enum: ["ppm", "pH"],
-                default: "ppm"
             }
         },
-        pressure_range: {
+        avg_pressure: {
             value: {
-                type: String,
+                type: Number,
             },
             unit: {
                 type: String,
@@ -144,9 +138,6 @@ const filterSchema = new mongoose.Schema({
                 }
             },
             material: {
-                value: {
-                    type: String
-                },
                 unit: {
                     type: String,
                     enum: [
@@ -171,6 +162,6 @@ const filterSchema = new mongoose.Schema({
 }
 )
 
-const Filter = mongoose.model('Filter', filterSchema)
+const Filter = Product.discriminator('Filter', filterSchema)
 
 module.exports = Filter;

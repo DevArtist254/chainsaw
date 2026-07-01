@@ -35,13 +35,7 @@ const vesselSchema = new mongoose.Schema({
                 default: "g"
             },
         },
-        polypropylene_quantity: {
-            value: Number,
-            unit: {
-                type: String,
-                enum: ["pcs", "pc"],
-            }
-        }
+        element_quantity: Number
     },
     specifications: {
         min_flow_rate: {

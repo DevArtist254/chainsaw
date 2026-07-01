@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Product = require('./productModel');
 
-const BlowerSchema = new mongoose.Schema({
+const SterilizerSchema = new mongoose.Schema({
     packing_dimensions: {
         length: {
             value: Number,
@@ -33,22 +33,13 @@ const BlowerSchema = new mongoose.Schema({
         }
     },
     specifications: {
-        max_flow_rate: {
+        flow_rate: {
             value: {
                 type: Number,
             },
             unit: {
                 type: String,
-                enum: ["gpm", "lpm", "m3/h", "gpd"],
-            }
-        },
-        min_flow_rate: {
-            value: {
-                type: Number,
-            },
-            unit: {
-                type: String,
-                enum: ["gpm", "lpm", "m3/h", "gpd"],
+                enum: ["g/h", "gpm", "lpm", "m3/h", "gpd"],
             }
         },
         electrical_details: {
@@ -57,14 +48,6 @@ const BlowerSchema = new mongoose.Schema({
                 unit: {
                     type: String,
                     enum: ["w", "kW", "MW", "GW"],
-                    default: "w"
-                }
-            },
-            horse_power: {
-                value: Number,
-                unit: {
-                    type: String,
-                    enum: ["hp", "w", "ahp"],
                 }
             },
             voltage: {
@@ -98,15 +81,16 @@ const BlowerSchema = new mongoose.Schema({
             unit: {
                 type: String,
                 enum: ["Pa", "bar", "kPa", "MPa", "psi"],
+                default: "bar"
             }
         },
-        speed: {
+        service_life: {
             value: {
-                type: Number,
+                type: Number
             },
             unit: {
                 type: String,
-                enum: ["rpm", "m/s", "km/h"],
+                enum: ["ltrs", "Days"],
             }
         },
         details: {
@@ -136,17 +120,28 @@ const BlowerSchema = new mongoose.Schema({
                     enum: ["female", "male", "flanged"],
                 }
             },
-            stages: {
+            lamp_quantity: Number,
+            lamp_pins: {
                 value: {
                     type: String
                 },
                 unit: {
                     type: String,
                     enum: [
-                        "Double",
-                        "Single",
+                        "4pin single side",
+                        "2pin both sides",
+                        "4pin stepped"
                     ]
                 }
+            },
+            lamp_length: {
+                value: {
+                    type: Number
+                },
+                unit: {
+                    type: String,
+                    enum: ['inch', "cm", "m", "mm"],
+                },
             }
         }
     }
@@ -156,6 +151,6 @@ const BlowerSchema = new mongoose.Schema({
 }
 )
 
-const Blower = Product.discriminator('Blower', BlowerSchema)
+const Sterilizer = Product.discriminator('sterilizer', SterilizerSchema)
 
-module.exports = Blower;
+module.exports = Sterilizer;

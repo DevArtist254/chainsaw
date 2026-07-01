@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Product = require('./productModel');
 
-const BlowerSchema = new mongoose.Schema({
+const DesalinationSystemSchema = new mongoose.Schema({
     packing_dimensions: {
         length: {
             value: Number,
@@ -42,22 +42,12 @@ const BlowerSchema = new mongoose.Schema({
                 enum: ["gpm", "lpm", "m3/h", "gpd"],
             }
         },
-        min_flow_rate: {
-            value: {
-                type: Number,
-            },
-            unit: {
-                type: String,
-                enum: ["gpm", "lpm", "m3/h", "gpd"],
-            }
-        },
         electrical_details: {
             power: {
                 value: Number,
                 unit: {
                     type: String,
                     enum: ["w", "kW", "MW", "GW"],
-                    default: "w"
                 }
             },
             horse_power: {
@@ -100,15 +90,7 @@ const BlowerSchema = new mongoose.Schema({
                 enum: ["Pa", "bar", "kPa", "MPa", "psi"],
             }
         },
-        speed: {
-            value: {
-                type: Number,
-            },
-            unit: {
-                type: String,
-                enum: ["rpm", "m/s", "km/h"],
-            }
-        },
+        salt_rejection: String,
         details: {
             inlet: {
                 value: {
@@ -117,6 +99,7 @@ const BlowerSchema = new mongoose.Schema({
                 unit: {
                     type: String,
                     enum: ['inch', "cm", "m", "mm"],
+                    default: "inch"
                 },
                 plumbing: {
                     type: String,
@@ -130,22 +113,19 @@ const BlowerSchema = new mongoose.Schema({
                 unit: {
                     type: String,
                     enum: ['inch', "cm", "m", "mm"],
+                    default: "inch"
                 },
                 plumbing: {
                     type: String,
                     enum: ["female", "male", "flanged"],
                 }
             },
-            stages: {
+            elements: {
                 value: {
-                    type: String
+                    type: Number
                 },
-                unit: {
-                    type: String,
-                    enum: [
-                        "Double",
-                        "Single",
-                    ]
+                stages: {
+                    type: String
                 }
             }
         }
@@ -156,6 +136,6 @@ const BlowerSchema = new mongoose.Schema({
 }
 )
 
-const Blower = Product.discriminator('Blower', BlowerSchema)
+const DesalinationSystem = Product.discriminator('desalinationsystem', DesalinationSystemSchema)
 
-module.exports = Blower;
+module.exports = DesalinationSystem;

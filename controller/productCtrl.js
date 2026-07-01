@@ -1,4 +1,14 @@
+const Blower = require("../model/Blower");
+const Chemical = require("../model/Chemical");
+const Controller = require("../model/Controllers");
+const DesalinationSystem = require("../model/DesalinationSystems");
+const Filter = require("../model/Filters");
+const FlowMeter = require("../model/FlowMeter");
+const PlumbingFitting = require("../model/PlumbingFittings");
 const Product = require("../model/productModel");
+const Sterilizer = require("../model/Sterilizer");
+const SurfacePump = require("../model/SurfacePumps");
+const Vessel = require("../model/Vessels");
 
 // uploadProductImages, resizeProductImages, updateProduct
 /*
@@ -80,7 +90,34 @@ exports.getProduct = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
     try {
-        const newProduct = await Product.create(req.body)
+        let newProduct;
+        const { category } = req.body;
+
+        if (category.toLowerCase() === "filter") {
+            newProduct = await Filter.create(req.body)
+        } else if (category.toLowerCase() === "blower") {
+            newProduct = await Blower.create(req.body)
+        } else if (category.toLowerCase() === "sterilizer") {
+            newProduct = await Sterilizer.create(req.body)
+        } else if (category.toLowerCase() === "vessel") {
+            newProduct = await Vessel.create(req.body)
+        } else if (category.toLowerCase() === "chemical") {
+            newProduct = await Chemical.create(req.body)
+        } else if (category.toLowerCase() === "controller") {
+            newProduct = await Controller.create(req.body)
+        } else if (category.toLowerCase() === "surface pumps") {
+            newProduct = await SurfacePump.create(req.body)
+        } else if (category.toLowerCase() === "submersible pumps") {
+            newProduct = await SurfacePump.create(req.body)
+        } else if (category.toLowerCase() === "plumbing fittings") {
+            newProduct = await PlumbingFitting.create(req.body)
+        } else if (category.toLowerCase() === "desalination systems") {
+            newProduct = await DesalinationSystem.create(req.body)
+        } else if (category.toLowerCase() === "flow meter") {
+            newProduct = await FlowMeter.create(req.body)
+        } else {
+            newProduct = await Product.create(req.body)
+        }
 
         res.status(201).json({
             status: "success",

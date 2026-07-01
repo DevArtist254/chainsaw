@@ -4,7 +4,7 @@ const { getProducts, getProduct, createProduct } = require("../controller/produc
 const route = express.Router();
 
 route.get("/", getProducts);
-route.post("/:category/:subCategory", createProduct);
+route.post("/", createProduct);
 
 // route.patch("/:id", uploadProductImages, resizeProductImages, updateProduct);
 
